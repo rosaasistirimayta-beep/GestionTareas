@@ -1,118 +1,75 @@
-Se agregó la descripción completa del proyecto con migraciones, modelos, controladores y frontend. Estructura del Proyecto
-Migraciones
-create_todos_table.php
+# ESTRUCTURA DEL PROYECTO
 
-Crea la tabla todos con:
-
-Título
-
-Descripción
-
-Estado (creado, en-proceso, finalizado)
-
-Foreign key a users
-
-Timestamps
+## MIGRACIONES
+### create_todos_table.php
+Crea la tabla `todos` con:  
+- **TÍTULO**  
+- **DESCRIPCIÓN**  
+- **ESTADO** (creado, en-proceso, finalizado)  
+- **FOREIGN KEY A USERS**  
+- **TIMESTAMPS**  
 
 Comentarios incluidos para documentar cada columna.
 
-add_two_factor_columns_to_users_table.php
-
-Agrega columnas necesarias para 2FA.
-
+### add_two_factor_columns_to_users_table.php
+Agrega columnas necesarias para 2FA.  
 Incluye explicación del propósito de cada campo.
 
-Modelos
-Todo.php
+## MODELOS
+### Todo.php
+Modelo Eloquent documentado con:  
+- **$FILLABLE** para asignación masiva segura.  
+- **RELACIONES**: belongsTo(User::class)  
+- **SCOPES COMUNES**, por ejemplo: scopeEstado($query, $estado) para filtros por estado.  
+- **ATRIBUTOS PERSONALIZADOS** donde corresponde.
 
-Modelo Eloquent documentado con:
+### User.php
+Incluye:  
+- **RELACIONES CON TAREAS**  
+- **CONFIGURACIÓN PARA FORTIFY Y AUTENTICACIÓN MODERNA**
 
-$fillable para asignación masiva segura.
+## CONTROLADORES
+### TodoController.php
+CRUD completo y documentado:  
+- **INDEX()** → Lista de tareas, incluye filtros.  
+- **STORE()** → Crea una nueva tarea, validación con Form Request.  
+- **UPDATE()** → Edita título, descripción o estado.  
+- **DESTROY()** → Elimina tareas.  
 
-Relaciones:
+Usa Inertia para renderizar componentes React.  
+Incluye políticas (**TodoPolicy**) para garantizar seguridad por usuario.
 
-belongsTo(User::class)
+## MIDDLEWARES
+- **HandleInertiaRequests** → Manejo de datos compartidos en todas las vistas.  
+- **HandleAppearance** → Manejo de tema claro/oscuro.
 
-Scopes comunes, por ejemplo:
+## VISTAS Y FRONTEND (INERTIA + REACT + TYPESCRIPT)
+Dentro de `resources/js/pages/Todos`:  
+- **INDEX.TSX** → Tabla con filtrado por estado.  
+- **CREATE.TSX** → Formulario para crear tareas.  
+- **EDIT.TSX** → Formulario para editar.  
+- **SHOW.TSX** → Vista de detalles.  
 
-scopeEstado($query, $estado) para filtros por estado.
+Componentes UI reutilizables (botones, inputs, tablas, modales, alerts, etc.) basados en **shadcn/ui**.
 
-Atributos personalizados donde corresponde.
+## PROPÓSITO
+Este proyecto está diseñado para:  
+- Ser una plantilla base para aplicaciones **Laravel + Inertia + React**.  
+- Enseñar buenas prácticas con **Laravel 10+**.  
+- Mostrar cómo estructurar controladores, modelos, políticas y migraciones.  
+- Servir como referencia para **UI moderna con React + TypeScript**.  
+- Implementar un flujo de estados realista para tareas.
 
-User.php
+## REQUISITOS
+- **PHP ≥ 8.3**  
+- **COMPOSER**  
+- **LARAVEL ≥ 10.X**  
+- **NODE.JS ≥ 18**  
+- **BASE DE DATOS MYSQL O POSTGRESQL**  
+- **NPM ≥ 9**
 
-Incluye:
-
-Relaciones con tareas.
-
-Configuración para Fortify y autenticación moderna.
-
-Controladores
-TodoController.php
-
-CRUD completo y documentado:
-
-index() → Lista de tareas, incluye filtros.
-
-store() → Crea una nueva tarea, validación con Form Request.
-
-update() → Edita título, descripción o estado.
-
-destroy() → Elimina tareas.
-
-Usa Inertia para renderizar componentes React.
-
-Incluye politicas (TodoPolicy) para garantizar seguridad por usuario.
-
-Middlewares
-
-HandleInertiaRequests → Manejo de datos compartidos en todas las vistas.
-
-HandleAppearance → Manejo de tema claro/oscuro.
-
-Vistas y Frontend (Inertia + React + TypeScript)
-
-Dentro de resources/js/pages/Todos:
-
-index.tsx → Tabla con filtrado por estado.
-
-create.tsx → Formulario para crear tareas.
-
-edit.tsx → Formulario para editar.
-
-show.tsx → Vista de detalles.
-
-Componentes UI reutilizables (botones, inputs, tablas, modales, alerts, etc.) basados en shadcn/ui.
-
-Propósito
-
-Este proyecto está diseñado para:
-
-Ser una plantilla base para aplicaciones Laravel + Inertia + React.
-
-Enseñar buenas prácticas con Laravel 10+.
-
-Mostrar cómo estructurar controladores, modelos, políticas y migraciones.
-
-Servir como referencia para UI moderna con React + TypeScript.
-
-Implementar un flujo de estados realista para tareas.
-
-Requisitos
-
-PHP ≥ 8.3
-
-Composer
-
-Laravel ≥ 10.x
-
-Node.js ≥ 18
-
-Base de datos MySQL o PostgreSQL
-
-NPM ≥ 9
-
-Instalación
+## INSTALACIÓN
+```bash
 git clone https://github.com/rosaasistirimayta-beep/GestionTareas.git
 cd GestionTareas
 composer install
@@ -121,19 +78,3 @@ cp .env.example .env
 php artisan key:generate
 php artisan migrate --seed
 npm run dev
-
-Contribuir
-
-¡Contribuciones y mejoras son bienvenidas!
-
-Puedes:
-
-Hacer un fork del repositorio.
-
-Crear un issue.
-
-Enviar un pull request con tus mejoras.
-
-Licencia
-
-Este proyecto está disponible bajo la MIT License.
